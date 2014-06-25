@@ -83,11 +83,11 @@ void TicTacToe::update_board(char playerPiece)
     print_board(playerPiece, playerRow, playerCol);
 }
 
-int TicTacToe::check_for_win(char playerPiece)
+int TicTacToe::check_for_exit(char playerPiece)
 {
     /*slices the board and checks if playerPiece occupies that slot.
     If the player makes a line, print that playerPiece has won
-    and exit the game.*/
+    and exit the game. Also checks for a tie game*/
 
     for (int i = 0; i < 3; i++) {
         if (board[i][0] == playerPiece && board[i][1] == playerPiece && board[i][2] == playerPiece){
@@ -107,6 +107,15 @@ int TicTacToe::check_for_win(char playerPiece)
     if(board[0][2] == playerPiece && board[1][1] == playerPiece && board[2][0] == playerPiece){
         std::cout << "\nPlayer " << playerPiece << " wins!" << std::endl;
     }
+
+    for (int j = 0; j < 3; j++){
+        if (board[j][0] != '-' && board[j][1] != '-' && board[j][2] != '-'
+            && board[0][j] != '-' && board[1][j] != '-' && board[2][j] != '-'){
+            std::cout << "\nIts a draw! No one wins!" << std::endl;
+            return true;
+        }
+    }
+
     return false;
 }
 
@@ -117,13 +126,13 @@ int TicTacToe::run_game()
     while (true){
         std::cout << "\nPlayer one, it is your turn" << std::endl;
         update_board(letter_x);
-        if (check_for_win(letter_x) == true){
+        if (check_for_exit(letter_x)){
             exitGame = true;
             break;
         }
         std::cout << "\nPlayer two, it is your turn" << std::endl;
         update_board(letter_o);
-        if (check_for_win(letter_o) == true){
+        if (check_for_exit(letter_o)){
             exitGame = true;
             break;
         }

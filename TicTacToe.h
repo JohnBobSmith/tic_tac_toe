@@ -16,8 +16,8 @@ class TicTacToe
     private:
         void update_board(char playerPiece);
         void print_board(char playerPiece, int row, int col);
-        int check_for_win(char playerPiece);
         void check_for_overlap(int row, int col);
+        int check_for_exit(char playerPiece);
         char board[3][3];
 };
 
