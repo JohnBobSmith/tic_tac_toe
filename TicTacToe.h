@@ -2,6 +2,10 @@
 Released under the GPL liscence version 2
 Written by JohnBobSmith*/
 
+/*Tic Tac Toe Game v1.0
+Released under the GPL liscence version 2
+Written by JohnBobSmith*/
+
 #ifndef TICTACTOE_H
 #define TICTACTOE_H
 
