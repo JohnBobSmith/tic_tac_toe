@@ -5,11 +5,14 @@ Written by JohnBobSmith*/
 #include "TicTacToe.h"
 #include <iostream>
 #include <limits>
+#include <cstdlib>
+#include <ctime>
 
 char board[3][3];
 
 TicTacToe::TicTacToe()
 {
+    srand(time(0));
     std::cout << "\nWelcome to tic tac toe!" << std::endl;
     std::cout << "Here is a blank board: " << std::endl;
     for(int i = 0; i < 3; i++){
@@ -31,6 +34,7 @@ void TicTacToe::print_board(char playerPiece, int row, int col)
             std::cout << board[i][j];
         }
     }
+    std::cout << std::endl;
 }
 
 void TicTacToe::check_for_overlap(int row, int col)
@@ -119,6 +123,25 @@ int TicTacToe::check_for_exit(char playerPiece)
     return false;
 }
 
+void TicTacToe::ai_make_move(char aiPiece, char playerPiece)
+{
+    int randomRow = rand()%3;
+    int randomCol = rand()%3;
+
+    if (board[1][1] == '-'){
+        print_board(aiPiece, 1, 1);
+        std::cout << "\nThe AI has made their move" << std::endl;
+    } else {
+        while (true){
+            if(board[randomRow][randomCol] == '-'){
+                print_board(aiPiece, randomRow, randomCol);
+                std::cout << "\nThe AI has made their move" << std::endl;
+                break;
+            }
+        }
+    }
+}
+
 int TicTacToe::run_game()
 {
     char letter_o = 'O';
@@ -130,8 +153,7 @@ int TicTacToe::run_game()
             exitGame = true;
             break;
         }
-        std::cout << "\nPlayer two, it is your turn" << std::endl;
-        update_board(letter_o);
+        ai_make_move(letter_o, letter_x);
         if (check_for_exit(letter_o)){
             exitGame = true;
             break;
